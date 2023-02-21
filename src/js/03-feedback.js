@@ -14,7 +14,7 @@ function handleInput() {
 function handleSubmit(e) {
     e.preventDefault();
     console.log(localStorage.getItem("feedback-form-state"));
-    localStorage.clear("feedback-form-state");
+    localStorage.removeItem("feedback-form-state");
     form.reset();
 }
 
