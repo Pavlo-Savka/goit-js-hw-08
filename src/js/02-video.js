@@ -2,12 +2,12 @@
   const iframe = document.querySelector('iframe');
   const player = new Vimeo.Player(iframe);
   const throttle = require('lodash.throttle');
-  
+const STORAGE_TIME_KEY = "videoplayer-current-time";
 player.on('timeupdate', throttle(currentTimePlay, 1000));
 function currentTimePlay (time) {
-    localStorage.setItem("videoplayer-current-time", time.seconds);
+    localStorage.setItem(STORAGE_TIME_KEY, time.seconds);
 };
- player.setCurrentTime(localStorage.getItem("videoplayer-current-time")).then(function() {
+ player.setCurrentTime(localStorage.getItem(STORAGE_TIME_KEY)).then(function() {
     // seconds = the actual time that the player seeked to
 }).catch(function(error) {
     switch (error.name) {
