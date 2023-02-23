@@ -4,26 +4,25 @@
 form.addEventListener("input", throttle(handleInput, 500));
 form.addEventListener("submit", handleSubmit);
 const STORAGE_KEY = "feedback-form-state";
+const formData2 = {};
 
-
-function handleInput() { 
-    const formData = { email: form.email.value, message: form.message.value };
+function handleInput(e) { 
+    //const formData = { email: form.email.value, message: form.message.value };
+    formData2[e.target.name] = e.target.value;
+   // console.log(formData2);
     localStorage.setItem(STORAGE_KEY, 
-        JSON.stringify(formData));
-    
-    // console.log(JSON.parse(storage).email);
-    // console.log(JSON.parse(storage).message);
+        JSON.stringify(formData2)); 
 };
 
 function handleSubmit(e) {
     e.preventDefault();
-    if (JSON.parse(localStorage.getItem(STORAGE_KEY)).email === "" || 
-        JSON.parse(localStorage.getItem(STORAGE_KEY)).message === "")  {
+    if (form.email.value === "" || 
+        form.message.value === "")  {
         alert("Заповніть усі поля форми!")
         return
     };
     const stringData = localStorage.getItem(STORAGE_KEY);
-    console.log(stringData);
+    console.log(formData2);
     localStorage.removeItem(STORAGE_KEY);
     form.reset();
 };
