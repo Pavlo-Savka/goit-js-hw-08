@@ -20,8 +20,7 @@ function handleSubmit(e) {
         form.message.value === "")  {
         alert("Заповніть усі поля форми!")
         return
-    };
-    const stringData = localStorage.getItem(STORAGE_KEY);
+    };  
     console.log(formData2);
     localStorage.removeItem(STORAGE_KEY);
     form.reset();
