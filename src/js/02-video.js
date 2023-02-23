@@ -7,16 +7,10 @@ player.on('timeupdate', throttle(currentTimePlay, 1000));
 function currentTimePlay (time) {
     localStorage.setItem(STORAGE_TIME_KEY, time.seconds);
 };
- player.setCurrentTime(localStorage.getItem(STORAGE_TIME_KEY)).then(function() {
-    // seconds = the actual time that the player seeked to
-}).catch(function(error) {
-    switch (error.name) {
-        case 'RangeError':
-            // the time was less than 0 or greater than the video’s duration
-            break;
 
-        default:
-            // some other error occurred
-            break;
-    }
-});
+try {
+    player.setCurrentTime(localStorage.getItem(STORAGE_TIME_KEY));
+}
+catch (e) {
+    player.setCurrentTime(0);
+};
